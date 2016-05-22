@@ -39,7 +39,7 @@ void init_random(double ****I, int *m){
     for(int i=0; i<m[0]; ++i){
         for(int j=0; j<m[1]; ++j){
             for(int k=0; k<m[2]; ++k){
-                for(int l=0; l<m[2]; ++l){
+                for(int l=0; l<m[3]; ++l){
                     I[i][j][k][l] = rand()%1000;
                 }
             }
@@ -62,7 +62,7 @@ double integrate_rectangle_4d(double ****V, int i, int j, int k, int l, int *m){
                 if(kk>k){
                     continue;
                 }
-                for(int ll=0; ll<m[2]; ++ll){
+                for(int ll=0; ll<m[3]; ++ll){
                     if(ll<=l){
                         sum += V[i-ii][j-jj][k-kk][l-ll];
                     }
@@ -298,10 +298,10 @@ void test_fast_integrals(void){
     double max_difference = -1;
     double min_I = I[0][0][0][0];
     double max_I = I[0][0][0][0];
-    for(int i=0; i<m[0]; ++i){
-        for(int j=0; j<m[1]; ++j){
-            for(int k=0; k<m[2]; ++k){
-                for(int l=0; l<m[2]; ++l){
+    for(int i=0; i<n[0]; ++i){
+        for(int j=0; j<n[1]; ++j){
+            for(int k=0; k<n[2]; ++k){
+                for(int l=0; l<n[3]; ++l){
                     double d = ABS(A_direct[i][j][k][l] - A_fast[i][j][k][l]);
                     max_difference = MAX(max_difference, d);
                     min_I = MIN(min_I, I[i][j][k][l]);
